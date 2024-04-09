@@ -2,7 +2,7 @@ const {chromium} = require('playwright'); // or firefox or webkit
 
 async function register(username, password, activityUrl) {
     // Launch a new browser instance
-    const browser = await chromium.launch({headless: false}); // set headless: true to run without opening a browser window
+    const browser = await chromium.launch({headless: true}); // set headless: true to run without opening a browser window
     const context = await browser.newContext({timeout: 1200000}); // 1200000
     const page = await context.newPage();
 
@@ -33,13 +33,13 @@ async function register(username, password, activityUrl) {
     await page.click('[data-qa-id="shopping-cart-orderSummary-checkoutBtn"][type="submit"]')
     console.log('Clicked Submit for checkout')
 
-    // Check if the element exists
-    const confirmationElement = await page.$('[data-qa-id="confirmation-receiptNumber"]');
-
-    // If the element exists, print 'Success' to the console
-    if (confirmationElement) {
-        console.log('Success. Found the confirmation element.');
-    }
+    // // Check if the element exists
+    // const confirmationElement = await page.$('[data-qa-id="confirmation-receiptNumber"]');
+    //
+    // // If the element exists, print 'Success' to the console
+    // if (confirmationElement) {
+    //     console.log('Success. Found the confirmation element.');
+    // }
 }
 
 async function main() {
