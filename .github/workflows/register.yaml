@@ -23,7 +23,9 @@ jobs:
       - name: Set Usernames and Activity URL
         run: |
           echo USERNAMES=${{ github.event.inputs.usernames }} >> $GITHUB_ENV
-          echo ACTIVITY_URL=${{ github.event.inputs.activity_url }} >> $GITHUB_ENV
+      - name: Set Activity URL
+        run: |
+          echo ACTIVITY_URL="${{ github.event.inputs.activity_url }}" >> $GITHUB_ENV
       - name: Mask Passwords
         run: |
           PASSWORDS=$(jq -r '.inputs.passwords' $GITHUB_EVENT_PATH)
