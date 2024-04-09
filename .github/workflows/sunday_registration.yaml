@@ -1,0 +1,11 @@
+name: "Sunday Registration"
+on:
+  schedule:
+    - cron: "55 9 * * 0"
+jobs:
+  call_workflow:
+    uses: fernandocamargoai/activity-registration/.github/workflows/register.yml@main
+    with:
+      usernames: ${{ secrets.SUNDAY_USERNAMES }}
+      passwords: ${{ secrets.SUNDAY_PASSWORDS }}
+      activity_url: ${{ secrets.SUNDAY_ACTIVITY_URL }}

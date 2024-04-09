@@ -14,6 +14,23 @@ on:
         description: "Activity URL"
         required: true
         default: "https://www.example.com"
+  workflow_call:
+    inputs:
+      usernames:
+        description: "Usernames to register"
+        required: true
+        default: "user1,user2"
+        type: string
+      passwords:
+        description: "Passwords to register"
+        required: true
+        default: "password1,password2"
+        type: string
+      activity_url:
+        description: "Activity URL"
+        required: true
+        default: "https://www.example.com"
+        type: string
 
 jobs:
   register:
