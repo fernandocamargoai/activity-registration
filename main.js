@@ -33,13 +33,7 @@ async function register(username, password, activityUrl) {
     await page.click('[data-qa-id="shopping-cart-orderSummary-checkoutBtn"][type="submit"]')
     console.log('Clicked Submit for checkout')
 
-    // // Check if the element exists
-    // const confirmationElement = await page.$('[data-qa-id="confirmation-receiptNumber"]');
-    //
-    // // If the element exists, print 'Success' to the console
-    // if (confirmationElement) {
-    //     console.log('Success. Found the confirmation element.');
-    // }
+    await browser.close();
 }
 
 async function main() {
