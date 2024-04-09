@@ -1,0 +1,39 @@
+name: "Tests: E2E"
+on:
+  workflow_dispatch:
+    inputs:
+      usernames:
+        description: "Usernames to register"
+        required: true
+        default: "user1,user2"
+      passwords:
+        description: "Passwords to register"
+        required: true
+        default: "password1,password2"
+      activity_url:
+        description: "Activity URL"
+        required: true
+        default: "https://www.example.com"
+
+jobs:
+  register:
+    name: Register
+    runs-on: ubuntu-latest
+    steps:
+      - name: Set Usernames and Activity URL
+        run: |
+          echo USERNAMES=${{ github.event.inputs.usernames }} >> $GITHUB_ENV
+          echo ACTIVITY_URL=${{ github.event.inputs.activity_url }} >> $GITHUB_ENV
+      - name: Mask Passwords
+        run: |
+          PASSWORDS=$(jq -r '.inputs.passwords' $GITHUB_EVENT_PATH)
+          echo ::add-mask::$PASSWORDS
+          echo PASSWORDS=$PASSWORDS >> $GITHUB_ENV
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+      - name: install dependencies
+        run: npm ci
+      - name: install playwright browsers
+        run: npx playwright install --with-deps
+      - name: main.js
+        run: node main.js
